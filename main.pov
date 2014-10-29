@@ -8,15 +8,21 @@
 #declare sq_field_y2 = 2.13;
 #declare sq_field_z = 9.75;
 
+#declare sq_aufschlaglinie_y = 1.78;
+
 camera {
-//	location  <-16.2, 1.8, -16>
-	location  <3.2, 1.8, -1>
+//	location  <3.2, 1.8, -1> /* original */
+	location  <3.2, 1.8, 2>
 	look_at   <3.2, 1.5, 9.75>
 	//angle 20
 }
 
 light_source {
 	<3.2, 10, -1>
+    color White
+}
+light_source {
+	<3.2, 0, 5>
     color White
 }
 
@@ -28,6 +34,7 @@ light_source {
   }
 
 #include "floor.inc"
+#include "walls.inc"
 
 //  plane {
 //    y, -1
