@@ -2,6 +2,9 @@
 #include "textures.inc"
 #include "woods.inc"
 
+/* gravity */
+#declare g = 9.81;
+
 /* squash numbers */
 #declare sq_field_x = 6.4;
 #declare sq_field_y1 = 4.57;
@@ -20,8 +23,8 @@
 camera {
 	location  <3.2, 1.8, -1> /* original */
 //	location  <3.2, 1.8, 2>
-	look_at   <3.2, 1.5, 9.75> /* original */
-//	look_at   <1, 1.5, 1.3>
+//	look_at   <3.2, 1.5, 9.75> /* original */
+	look_at   <sq_field_x/4 + clock * sq_field_x/2, 1.5, 4.3>
 	//angle 20
 }
 
@@ -34,17 +37,9 @@ light_source {
     color White
 }
 
-sphere {
-	<3.2,0.1,5>, 0.04
-	texture {
-		pigment {
-			color Black
-		}
-	}
-}
-
 #include "floor.inc"
 #include "walls.inc"
+#include "ball.inc"
 
 //  plane {
 //    y, -1
