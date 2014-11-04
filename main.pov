@@ -8,12 +8,20 @@
 #declare sq_field_y2 = 2.13;
 #declare sq_field_z = 9.75;
 
-#declare sq_aufschlaglinie_y = 1.78;
+#declare sq_line_thickness = 0.05;
+#declare inc_height = 0.0001;
+
+#declare sq_serviceline_wall_y = 1.78;
+#declare sq_serviceline_floor_z = 4.26;
+#declare sq_tin_y = 0.43;
+#declare sq_servicefield_x = 1.60;
+#declare sq_servicefield_z = 2.61;
 
 camera {
-//	location  <3.2, 1.8, -1> /* original */
-	location  <3.2, 1.8, 2>
-	look_at   <3.2, 1.5, 9.75>
+	location  <3.2, 1.8, -1> /* original */
+//	location  <3.2, 1.8, 2>
+	look_at   <3.2, 1.5, 9.75> /* original */
+//	look_at   <1, 1.5, 1.3>
 	//angle 20
 }
 
@@ -26,12 +34,14 @@ light_source {
     color White
 }
 
-  sphere {
-    <3.2,0.1,5>,0.04
-		color Black
-//    texture { Sapphire_Agate }
-//    translate <1.5, 0, -2>
-  }
+sphere {
+	<3.2,0.1,5>, 0.04
+	texture {
+		pigment {
+			color Black
+		}
+	}
+}
 
 #include "floor.inc"
 #include "walls.inc"
