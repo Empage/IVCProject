@@ -10,6 +10,8 @@
 #declare sq_field_y1 = 4.57;
 #declare sq_field_y2 = 2.13;
 #declare sq_field_z = 9.75;
+/* squash ball radius */
+#declare sq_ball_r = 0.02;
 
 #declare sq_line_thickness = 0.05;
 #declare inc_height = 0.0001;
@@ -20,13 +22,6 @@
 #declare sq_servicefield_x = 1.60;
 #declare sq_servicefield_z = 2.61;
 
-camera {
-	location  <3.2, 1.8, -1> /* original */
-//	location  <3.2, 1.8, 2>
-//	look_at   <3.2, 1.5, 9.75> /* original */
-	look_at   <sq_field_x/4 + clock * sq_field_x/2, 1.5, 4.3>
-	//angle 20
-}
 
 light_source {
 	<3.2, 10, -1>
@@ -37,9 +32,9 @@ light_source {
     color White
 }
 
-#include "floor.inc"
-#include "walls.inc"
-#include "ball.inc"
+#include "static/floor.inc"
+#include "static/walls.inc"
+#include "static/ball.inc"
 
 //  plane {
 //    y, -1
