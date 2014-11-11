@@ -35,44 +35,4 @@ light_source {
 #include "static/floor.inc"
 #include "static/walls.inc"
 #include "static/ball.inc"
-
-//  plane {
-//    y, -1
-//    texture {
-//      pigment {
-//        checker
-//        color rgb<0.5, 0, 0>
-//        color rgb<0, 0.5, 0.5>
-//      }
-//      finish {
-//        diffuse 0.4
-//        ambient 0.2
-//        phong 1
-//        phong_size 100
-//        reflection 0.25
-//      }
-//    }
-//  }
-//  torus {
-//    1.5, 0.5
-//    texture { Brown_Agate }
-//    rotate <90, 160, 0>
-//    translate <-1, 1, 3>
-//  }
-//  box {
-//    <-1, -1, -1>, <1, 1, 1>
-//    texture { DMFLightOak }
-//    translate <2, 0, 2.3>
-//  }
-//  cone {
-//    <0,1,0>, 0, <0,0,0>, 1
-//    texture { PinkAlabaster }
-//    scale <1, 3, 1>
-//    translate <-2, -1, -1>
-//  }
-//  sphere {
-//    <0,0,0>,1
-//    texture { Sapphire_Agate }
-//    translate <1.5, 0, -2>
-//  }
-//
+#include "static/racket.inc"
