@@ -7,8 +7,19 @@
 #local ball_y = 1.5;
 
 camera {
-	location  <3.2, 1.7, 9>
-	look_at   <3.2,1.65,9.5>
+	location  <3.2, 1.7, 0.5>
+	look_at   <3.2,1.35,4.5>
+}
+
+object {
+	racket
+	rotate <clock*90, clock*90, 0>
+	translate <3.2, 1, 4.5>
+}
+
+object {
+	ball
+	translate <3.2, 1+hit_point, 9.5>
 }
 
 /* 

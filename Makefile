@@ -1,5 +1,5 @@
-OUTNAME := generated/`date +%Y%m%d%H%M%S`.png
-OUTNAME2:= generated/`date +%Y%m%d%H%M%S`_.png
+OUTNAME := generated/`date +%Y%m%d-%H-%M-%S`.png
+OUTNAME2:= generated/`date +%Y%m%d-%H-%M-%S`_.png
 INNAME  := animation2.pov
 
 all :
