@@ -1,31 +1,36 @@
 #include "static/MyRoundConicTorus.inc"
-cylinder {
-	<0, 0, 0>, <0, 0.41, 0>, 0.01
-	texture{ pigment{ color rgb<1,1,1>}}
-	translate<2.2,0.8,4>
-}
-
 
 #local scaling_x	= 1.4;
 #local upper_r		= 0.11;
 #local lower_r		= 0.051;
 #local border_r		= 0.005;
-#local d_r1_r2		= 0.16;
+#local d_r1_r2		= 0.15;
 #local grip_height	= 0.27;
 #local d_grip_net	= 0.08;
 
+#local racket_texture = texture {
+	pigment {
+		color rgb<0.2, 1, 0>
+	}
+	finish {phong 1}
+}
+
 union { 
-	object {
-		MyRoundConicTorus( 
-			0.15, // >0, vertical center distance of the upper and lower torii
-			upper_r, // >0, upper radius up by <0,C_distance,0>
-			lower_r, // >0,  lower radius on zero !!!
-			border_r, // border radius, // max. = min(lower radius, upper radius)
-			0 // Merge_On
-		)
-		texture{ pigment{ color rgb<1,1,1>}
-			finish { phong 1}
+	union {
+		object {
+			MyRoundConicTorus( 
+				d_r1_r2, // >0, vertical center distance of the upper and lower torii
+				upper_r, // >0, upper radius up by <0,C_distance,0>
+				lower_r, // >0,  lower radius on zero !!!
+				border_r, // border radius, // max. = min(lower radius, upper radius)
+				0 // Merge_On
+			)
+			texture {racket_texture}
 		}
+
+		/* draw all the strings into the racket */
+		#include "static/racket_strings.inc"
+
 		translate <-.003, grip_height + lower_r + 0.05, 0>
 	}
 	/* the grip stick */
@@ -33,9 +38,7 @@ union {
 		<0, 0, 0>
 		<0, grip_height, 0>
 		0.0075
-		texture{ pigment{ color rgb<1,1,1>}
-			finish { phong 1}
-		}
+		texture {racket_texture}
 	}
 	/* the grip itself */
 	cylinder {
@@ -44,7 +47,13 @@ union {
 		0.017
 		pigment {Black}
 	}
-	translate <3.2, 1.2, 4>
+	/* a sphere combining grip stick and upper part */
+	sphere {
+		<0, grip_height, 0>
+		2 * border_r
+		texture {racket_texture}
+	}
+	translate <3.2, 1.2, 9.5>
 }
 
 /*

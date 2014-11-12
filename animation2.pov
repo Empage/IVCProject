@@ -7,9 +7,17 @@
 #local ball_y = 1.5;
 
 camera {
-	location  <3.2, 1.5, 2>
-	look_at   <3.2,1.5,4>
+	location  <3.2, 1.7, 9>
+	look_at   <3.2,1.65,9.5>
 }
+
+/* 
+cylinder {
+	<0, 0, 0>, <0, 0.41, 0>, 0.01
+	texture{ pigment{ color rgb<1,1,1>}}
+	translate<2.2,0.8,4>
+}
+*/
 
 /*
 #switch (my_clk)
