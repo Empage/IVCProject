@@ -9,7 +9,7 @@ tmp :
 	povray Debug_Console=On Debug_File=On Width=600 Height=480 +I$(INNAME) +P +O$(OUTNAME) 
 
 tmp2 :
-	povray animation2.ini +O$(OUTNAME2)
+	povray animation3.ini +O$(OUTNAME2)
 
 clean :
 	rm -f generated/*.png generated/*.pov-state generated/debug.out
