@@ -85,7 +85,7 @@
 		<0, grip_height - 2*border_r, 0>
 		3 * border_r
 		texture {racket_texture}
-		scale z * 0.7
+		scale <1, 1, 0.7>
 	}
 }
 
