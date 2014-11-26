@@ -61,7 +61,8 @@
 	}
 	/* the grip stick */
 	cylinder {
-		<0, 0, 0>
+		/* 0.1 starting point, so that it does not show through the grip */
+		<0, 0.1, 0>
 		<0, grip_height, 0>
 		0.0075
 		texture {racket_texture}
