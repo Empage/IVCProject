@@ -1,6 +1,8 @@
 /* include all static parts */
 #include "static/main_static.inc"
 
+#include "ball_trajectory.inc"
+
 #local max_ball_speed = 42; /* m/s */
 
 /* ball location: */
@@ -10,8 +12,8 @@
 			   <5.2, 1.15, 3.5 + 2 * sq_ball_r>;
 
 camera {
-	location  <3.0, 1.7, 3.3>
-	look_at   <2.7,1.15,9.5>
+	location  <3.0, 1.7, 0.3>
+	look_at   <3.7,1.15,4.5>
 }
 
 /* look at tribune */
@@ -80,13 +82,25 @@ camera {
 		}
 	#break
 	/* ball flying to the wall */
-	/* 9.75-3.5 m with 42 m/s */
-	#range (1, 1.15)
-		/* clk shall range from 0 to 1 again */
-		#local clk = (clock - 1) / 0.15;
-
+	/* start at b_loc, hits the wall at <3.529, 2.310, 9.744> */
+	#range (1, 1.150)
 		object {
-			ball
-			translate b_loc
+			racket
+			rotate <0, 0, -70>
+			translate <5.2, 1.15, 3.5>
 		}
+
+		ball_trajectory(b_loc, max_ball_speed, 10, -20, clock-1)
+	#break
+	/* ball jumping back from wall */
+	/* start at <3.529, 2.310, 9.744>, hits the wall at TODO */
+	#range (1.150, 1.4)
+		object {
+			racket
+			rotate <0, 0, -70>
+			translate <5.2, 1.15, 3.5>
+		}
+
+		ball_trajectory(<3.529, 2.310, 9.744>, max_ball_speed * 2/3, -10, -20, clock-1.150)
+	#break
 #end
