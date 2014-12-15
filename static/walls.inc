@@ -34,8 +34,16 @@ box {
 	<sq_field_x, sq_tin_y - sq_line_thickness, sq_field_z + 0.1>
 	texture {
 		pigment {
+			image_map {
+				png "static/stelliwood_banner.png"
+				once			
+			}
+			scale <6.4, 0.4, 1>
+		}
+		/*pigment {
 			color <0.7, 0.7, 0.7>
 		}
+		*/
 	}
 }
 /* back wall */

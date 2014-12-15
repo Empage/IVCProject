@@ -24,11 +24,11 @@
 
 
 light_source {
-	<3.2, 10, -1>
+	<3.2, 5, 4>
     color White
 }
 light_source {
-	<3.2, 0, 5>
+	<0, 5, -4>
     color White
 }
 
@@ -36,3 +36,4 @@ light_source {
 #include "static/walls.inc"
 #include "static/ball.inc"
 #include "static/racket.inc"
+#include "static/hall.inc"

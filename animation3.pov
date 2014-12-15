@@ -10,9 +10,17 @@
 			   <5.2, 1.15, 3.5 + 2 * sq_ball_r>;
 
 camera {
-	location  <4.0, 1.7, 2.5>
-	look_at   <6.4-0.8,1.15,3.5>
+	location  <3.0, 1.7, 3.3>
+	look_at   <2.7,1.15,9.5>
 }
+
+/* look at tribune */
+/*
+camera {
+	location  <2.0, 1.7, 4>
+	look_at   <1,1.15,-3.5>
+}
+*/
 
 #switch (clock)
 	/* the upper swing of the racket */
