@@ -3,6 +3,8 @@
 
 #include "ball_trajectory.inc"
 
+#include "static/figure.inc"
+
 #local max_ball_speed = 42; /* m/s */
 
 /* ball location: */
@@ -21,6 +23,17 @@ object {
 	ball
 	translate b_loc 
 }
+
+object {
+    drawFigure(<0,0,0>, <-90 ,0 ,20>, <-90 ,0 ,-20>, <90 ,0 ,-20>, <90 ,0 ,20>, <0 ,0 ,0>, -<0 ,0 ,50>, <0 ,0 ,40>, <0,0,0>, <0 ,0 ,0>, <0 ,0 ,0>, "none", <0 ,0 ,0>, <0 ,0 ,0>, 1)
+    translate <2.9, 0.75, -3.2>
+}
+
+object {
+    drawFigure(<0,0,0>, <-90 ,0 ,20>, <-90 ,0 ,-20>, <90 ,0 ,-20>, <90 ,0 ,20>, <0 ,0 ,0>, -<0 ,0 ,50>, <0 ,0 ,40>, <0,0,0>, <0 ,0 ,0>, <0 ,0 ,0>, "none", <0 ,0 ,0>, <0 ,0 ,0>, 1)
+    translate <4, 0.75, -3.2>
+}
+
 
 #switch (clock)
 	/* camera moves from <-8.5, 1.7, -1.5> to <2.2, 1.7, -1.5> */
@@ -52,7 +65,7 @@ object {
 		/* shall go from 1.7 up to 3.5 over the glass and then down to 2.5 */
 		#local y_val_loc = -3280/441 * pow(clk,3) + 2972/441 * pow(clk,2) 
 					 + 472/315 * clk + 1.7;
-		 /* shall go from -1.5 to 0.5 */
+		/* shall go from -1.5 to 0.5 */
 		#local z_val_loc = (0.5 + 1.5) * clk - 1.5;
 
 		/* from <3.2, 1.6, -1> to <4.2, 0.4, 4> */
