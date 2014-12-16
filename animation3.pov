@@ -3,6 +3,8 @@
 
 #include "ball_trajectory.inc"
 
+#include "static/figure.inc"
+
 #local max_ball_speed = 42; /* m/s */
 
 /* ball location: */
@@ -22,13 +24,25 @@ camera {
 	location  <2.0, 1.7, 4>
 	look_at   <1,1.15,-3.5>
 }
-*/
+*/     
+
 
 #switch (clock)
 	/* the upper swing of the racket */
 	#range (0,0.5)
 		#local clk = clock * 2;
-
+		
+		// TODO: calculate correct angle for the elbow, so the arm matches the end of the racket
+		#local elbow = <0.0, 
+				0.0,
+				30>;      //<0 ,0 ,30>
+	    dbg("elbow", elbow)
+        object {
+            drawFigure(<0,0,0>, <0 ,0 ,20>, <0 ,0 ,-20>, <0 ,0 ,-20>, <0 ,0 ,20>, <0 ,0 ,0>, -<0 ,0 ,50>, <0 ,0 ,40>, elbow, <0 ,0 ,0>, <0 ,0 ,0>, "none", <0 ,0 ,0>, <0 ,0 ,0>, 1)
+            //translate <3.2, 0.9, 9.7>
+            translate <4.6,0.8,3.5>
+        }
+        
 		object {
 			racket
 			rotate <
