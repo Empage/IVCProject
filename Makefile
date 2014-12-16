@@ -6,7 +6,7 @@ all :
 	povray Width=600 Height=480 +I$(INNAME) +O$(OUTNAME)
 
 tmp :
-	povray Clock=1.15 Debug_Console=On Debug_File=On Width=600 Height=480 +I$(INNAME) +P +O$(OUTNAME) 
+	povray Clock=1.432 Debug_Console=On Debug_File=On Width=600 Height=480 +I$(INNAME) +P +O$(OUTNAME) 
 
 tmp2 :
 	povray animation3.ini +O$(OUTNAME2)

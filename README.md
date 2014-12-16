@@ -23,7 +23,7 @@ schieren.
 Notes:
 To use debug output:
 #debug concat("clk: ",str(clk, 0, 5),"\n")
-#debug concat("camera position = ",vstr(3, CamPos," - ",0,3),"\n")
+#debug concat("camera position = ",vstr(3, CamPos,", ",0,3),"\n")
 
 ca. maximum speed of a squash ball of hobby player: 42 m/s
 
