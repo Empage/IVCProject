@@ -30,28 +30,11 @@ camera {
 	look_at <(3.0 - 4.2) * clock/1.42 + 4.2, (1.4 - 0.4) * clock/1.42 + 0.4, 4.0>
 }
 
-
-/*
-camera {
-	location  <4.5, 1.7, 0.1>
-	look_at   <1.2,1.10,4.5>
-}
-*/
-
-/* look at tribune */
-/*
-camera {
-	location  <2.0, 1.7, 4>
-	look_at   <1,1.15,-3.5>
-}
-*/     
-
-
 #switch (clock)
 	/* the upper swing of the racket */
 	#range (0.0,0.3)
 		#local clk = clock / 0.3;
-		
+/*		
 		// TODO: calculate correct angle for the elbow, so the arm matches the end of the racket
 		#local elbow = <0.0, 
 				0.0,
@@ -62,6 +45,7 @@ camera {
             //translate <3.2, 0.9, 9.7>
             translate <4.6,0.8,3.5>
         }
+*/
         
 		object {
 			racket
