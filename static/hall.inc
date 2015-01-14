@@ -9,6 +9,14 @@ texture{
            phong_size 400}
 }
 
+#declare sq_glass_door_width = 0.8;
+#declare sq_glass_door = box {
+	<0.0, 0.01, 0.0>
+	<-sq_glass_door_width, 1.99, -0.02>
+//	texture {pigment {color Red}}
+	texture {sq_glass}
+}
+
 /* bounding box around everything */
 box {
 	<-8.6, -0.01, -8>
@@ -20,10 +28,17 @@ box {
 	}
 }
 /* glass wall of the court */
-box {
-	<0, 0, 0>
-	<6.4, 3, -0.02>
-	texture {sq_glass}
+difference {
+	box {
+		<0, 0, 0>
+		<6.4, 3, -0.02>
+		texture {sq_glass}
+	}
+	/* room for the glass door which is 80cm wide */
+	box {
+		<3.2-sq_glass_door_width/2, 0.01, 0.01>
+		<3.2+sq_glass_door_width/2, 2.0, -0.03>
+	}
 }
 /* wall next to glass wall */
 box {
