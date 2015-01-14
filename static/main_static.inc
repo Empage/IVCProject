@@ -31,6 +31,10 @@ light_source {
 	<0, 5, -4>
     color White
 }
+light_source {
+	<-4, 5, -2>
+    color White
+}
 
 #include "static/floor.inc"
 #include "static/walls.inc"

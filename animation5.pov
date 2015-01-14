@@ -44,6 +44,7 @@ object {
 
 		/* shall go from -8.5 to 2.2 */
 		#local x_val = (2.2 + 8.5) * clk - 8.5;
+		/*
 		camera {
 			location <
 				2.2,
@@ -55,6 +56,11 @@ object {
 				1.2,
 				0.0
 			>
+		}
+		*/
+		camera {
+			location <3.0, 1.7, -2.5>
+			look_at <3.5, 1.2, 0.0>
 		}
 
 		object {
