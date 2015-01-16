@@ -1,1 +1,3 @@
 *~
+doc/latex/*.aux
+doc/latex/*.log

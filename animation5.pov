@@ -59,8 +59,8 @@ object {
 		}
 		*/
 		camera {
-			location <3.0, 1.7, -2.5>
-			look_at <3.5, 1.2, 0.0>
+			location <0.5, 2.7, 0.1>
+			look_at <3.6, 1.2, 5.0>
 		}
 
 		object {

@@ -1,1 +1,49 @@
-TODO
+\documentclass[12pt,a4paper,oneside,ngerman]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Quellcode
+ \usepackage{listings}
+ \usepackage{courier}
+ \lstset{
+         basicstyle=\small\ttfamily, % Standardschrift
+         numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         lineskip=-2pt,
+         extendedchars=true,         %   
+         breaklines=true,            % Zeilen werden Umgebrochen
+%	  	 otherkeywords={uint8_t, uint16_t, int32_t, uint32_t, uint64_t, bool, States_t, CopOptype_t, Action_t, hash_state, rsa_key, symmetric_ECB, symmetric_CBC, symmetric_OFB, symmetric_CFB, symmetric_CTR, symmetric_xts, cop_t},
+         keywordstyle=\color{lstkeyword}\bfseries,
+            frame=b,    
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}}, %
+         stringstyle=\color{lststring}\ttfamily, % Farbe der String
+         commentstyle=\color{lstcomment},
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,%
+         framexleftmargin=17pt,%
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+
+\title{IVC Projekt "Squashspiel" Dokumentation}
+\author{Matthis Hauschild und Niels Porsiel}
+\date{\today}
+\begin{document}
+	\maketitle
+	\includegraphics[width=\linewidth]{images/titleimage.png}
+	\vspace{\fill}
+	\input{content}
+\end{document}
