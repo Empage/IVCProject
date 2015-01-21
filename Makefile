@@ -5,12 +5,12 @@ OUTNAME2:= generated/`date +%Y%m%d-%H-%M-%S`_.png
 
 all : animation3 animation4 animation5
 	
-INNAME  := animation7.pov
+INNAME  := animation5.pov
 tmp :
-	povray Clock=18.1 Debug_Console=On Debug_File=On Width=600 Height=480 +I$(INNAME) +P +O$(OUTNAME) 
+	povray Clock=2.1 Debug_Console=On Debug_File=On Width=600 Height=480 +I$(INNAME) +P +O$(OUTNAME) 
 
 tmp2 :
-	povray animation7.ini +O$(OUTNAME2)
+	povray animation5.ini +O$(OUTNAME2)
 
 clean :
 	rm -f generated/*.png generated/*.pov-state generated/debug.out

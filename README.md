@@ -16,6 +16,11 @@ Development notes:
 
 ca. maximum speed of a squash ball of hobby player: 42 m/s
 
+Animationsreihenfolge:
+1. Animation6
+2. Animation5
+3. Animation3
+
 To use debug output:
 ```
 #debug concat("clk: ",str(clk, 0, 5),"\n")
