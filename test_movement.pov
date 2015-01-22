@@ -6,10 +6,16 @@
 #include "static/figure.inc"
 
 camera {
+			location <0, 2, -0.5>
+			look_at <3.2, 1, -3>
+		}
+
+/*
+camera {
 			location <0, 1.7, 5>
 			look_at <3.2, 1, 5>
 		}
-/*		
+		
 camera {
 			location <3, 1.7, 6>
 			look_at <3, 1, 4>
