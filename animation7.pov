@@ -3,6 +3,7 @@
 
 #include "ball_trajectory.inc"
 #include "ball_trajectory2.inc"
+#include "ball_trajectory3.inc"
 
 #include "static/figure.inc"
 
@@ -344,6 +345,7 @@
 	/* from sidewall at <0.017, 1.150, 1.904> to mainwall at <3.665, 3.969, 9.726> */
 	#range (1.865, 2.277)
 		#local clk = (clock - 1.865) / (2.277 - 1.865);
+		/*
 		camera {
 			location <3.8, 3.5, -1.5 + 1*clk>
 			look_at <
@@ -351,6 +353,11 @@
 				1.5,
 				1.0 + 4*clk
 			>
+		}
+		*/
+		camera {
+		  location <0.8, 3.5, 8.5>
+		  look_at <3.2, 3.5, 8.5>
 		}
 
 		/* calculate end position of base point (gripper) of racket A */
@@ -375,11 +382,15 @@
 		ball_trajectory2(<0.017, 1.150, 1.904>, max_ball_speed * 1/2, 25, 25, 1, clock-1.865)
 	#break
 	/* from mainwall at <3.665, 3.969, 9.726> to */
-	#range (2.277, 2.577)
+	#range (2.277, 2.777)
 //		#local clk = (clock - 1.830) / (1.830 - 1.865);
+//		camera {
+//		  location <3.8, 3.5, -0.5>
+//		  look_at <3.2, 1.5, 5>
+//		}
 		camera {
-		  location <3.8, 3.5, -0.5>
-		  look_at <3.2, 1.5, 5>
+		  location <0.8, 3.5, 8.5>
+		  look_at <3.2, 3.5, 8.5>
 		}
 
 		/* calculate end position of base point (gripper) of racket A */
@@ -401,6 +412,6 @@
 			rotate <-35, 10, 70>
 			translate rB_loc
 		}
-		ball_trajectory2(<3.665, 3.969, 9.726>, max_ball_speed * 1/3, 10, 25, -1, clock-2.277)
+		ball_trajectory3(<3.665, 3.969, 9.726>, max_ball_speed * 1/3, 25, 25, -1, clock-2.277, clock-1.865, max_ball_speed * 1/2, 1.15)
 	#break
 #end
