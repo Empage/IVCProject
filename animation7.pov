@@ -342,10 +342,9 @@
 		}
 		ball_trajectory2(<0.431, 0.742, 1.016>, max_ball_speed * 2/3, 25, -25, 1, clock-1.830)
 	#break
-	/* from sidewall at <0.017, 1.150, 1.904> to mainwall at <3.665, 3.969, 9.726> */
-	#range (1.865, 2.277)
-		#local clk = (clock - 1.865) / (2.277 - 1.865);
-		/*
+	/* from sidewall at <0.017, 1.150, 1.904> to mainwall at <3,667, 2.933, 9.733> */
+	#range (1.865, 2.482)
+		#local clk = (clock - 1.865) / (2.482 - 1.865);
 		camera {
 			location <3.8, 3.5, -1.5 + 1*clk>
 			look_at <
@@ -354,11 +353,6 @@
 				1.0 + 4*clk
 			>
 		}
-		*/
-		camera {
-		  location <0.8, 3.5, 8.5>
-		  look_at <3.2, 3.5, 8.5>
-		}
 
 		/* calculate end position of base point (gripper) of racket A */
 		#local rA_loc = <5.554, 0.682, 3.884 + sq_ball_r> 
@@ -379,23 +373,22 @@
 			rotate <-35, 10, 70>
 			translate rB_loc
 		}
-		ball_trajectory2(<0.017, 1.150, 1.904>, max_ball_speed * 1/2, 25, 25, 1, clock-1.865)
+		ball_trajectory2(<0.017, 1.150, 1.904>, max_ball_speed * 1/3, 25, 25, 1, clock-1.865)
 	#break
-	/* from mainwall at <3.665, 3.969, 9.726> to */
-	#range (2.277, 2.777)
-//		#local clk = (clock - 1.830) / (1.830 - 1.865);
-//		camera {
-//		  location <3.8, 3.5, -0.5>
-//		  look_at <3.2, 1.5, 5>
-//		}
+	/* from mainwall at <3,667, 2.933, 9.733> to racket A <5.495, 0.976, 5.812> */
+	#range (2.482, 3.100)
+		#local clk = (clock - 2.482) / (3.101 - 2.482);
 		camera {
-		  location <0.8, 3.5, 8.5>
-		  look_at <3.2, 3.5, 8.5>
+		  location <3.8, 3.5, -0.5>
+		  look_at <3.2, 1.5, 5>
 		}
 
 		/* calculate end position of base point (gripper) of racket A */
-		#local rA_loc = <5.554, 0.682, 3.884 + sq_ball_r> 
-						- vrotate(<0, hit_point, 0>, <0, 0, -70>);
+		#local rA_loc = <
+			5.554 + (5.495 - 5.554)*clk, 
+			0.682 + (0.976 - 0.682)*clk, 
+			3.884 + (5.812 - 3.884)*clk + sq_ball_r
+		> - vrotate(<0, hit_point, 0>, <0, 0, -70>);
 
 		/* racket A (right) */
 		object {
@@ -412,6 +405,138 @@
 			rotate <-35, 10, 70>
 			translate rB_loc
 		}
-		ball_trajectory3(<3.665, 3.969, 9.726>, max_ball_speed * 1/3, 25, 25, -1, clock-2.277, clock-1.865, max_ball_speed * 1/2, 1.15)
+		ball_trajectory3(<3.667, 2.933, 9.733>, max_ball_speed * 1/6, 25, 25, -1, clock-2.482, clock-1.865, max_ball_speed * 1/3, 1.150)
+	#break
+	/* from racket A <5.495, 0.976, 5.812> to wall <5.849, 0.762, 9.738> */
+	#range (3.100, 3.608)
+//		#local clk = (clock - 3.100) / (3.608 - 3.100);
+		camera {
+		  location <3.8, 3.5, -0.5>
+		  look_at <3.2, 1.5, 5>
+		}
+
+		/* calculate end position of base point (gripper) of racket A */
+		#local rA_loc = <
+			5.495, 
+			0.976, 
+			5.812 + sq_ball_r
+		> - vrotate(<0, hit_point, 0>, <0, 0, -70>);
+
+		/* racket A (right) */
+		object {
+			racket
+			rotate <0, 0, -70>
+			translate rA_loc
+		}
+
+		#local rB_loc = <0.431, 0.742, 1.016>
+						- vrotate(<0, hit_point, 0>, <-35, 0, 70>);
+		/* racket B (left) */
+		object {
+			racket
+			rotate <-35, 10, 70>
+			translate rB_loc
+		}
+		ball_trajectory2(<5.495, 0.976, 5.812>, 8, 15, 5, 1, clock-3.100)
+	#break
+	/* from wall <5.849, 0.762, 9.738> to floor <5.931, 0.036, 8.825> */
+	#range (3.608, 3.798)
+//		#local clk = (clock - 3.100) / (3.608 - 3.100);
+		camera {
+		  location <3.8, 3.5, -0.5>
+		  look_at <3.2, 1.5, 5>
+		}
+
+		/* calculate end position of base point (gripper) of racket A */
+		#local rA_loc = <
+			5.495, 
+			0.976, 
+			5.812 + sq_ball_r
+		> - vrotate(<0, hit_point, 0>, <0, 0, -70>);
+
+		/* racket A (right) */
+		object {
+			racket
+			rotate <0, 0, -70>
+			translate rA_loc
+		}
+
+		#local rB_loc = <0.431, 0.742, 1.016>
+						- vrotate(<0, hit_point, 0>, <-35, 0, 70>);
+		/* racket B (left) */
+		object {
+			racket
+			rotate <-35, 10, 70>
+			translate rB_loc
+		}
+		ball_trajectory3(<5.849, 0.762, 9.738>, 5, 15, 5, -1, clock-3.608, clock-3.100, 8, 0.976)
+	#break
+	/* from floor <5.931, 0.036, 8.825> to <5.957, 0.025, 8.533> */
+	#range (3.797, 3.895)
+//		#local clk = (clock - 3.100) / (3.608 - 3.100);
+		camera {
+		  location <3.8, 3.5, -0.5>
+		  look_at <3.2, 1.5, 5>
+		}
+
+		/* calculate end position of base point (gripper) of racket A */
+		#local rA_loc = <
+			5.495, 
+			0.976, 
+			5.812 + sq_ball_r
+		> - vrotate(<0, hit_point, 0>, <0, 0, -70>);
+
+		/* racket A (right) */
+		object {
+			racket
+			rotate <0, 0, -70>
+			translate rA_loc
+		}
+
+		#local rB_loc = <0.431, 0.742, 1.016>
+						- vrotate(<0, hit_point, 0>, <-35, 0, 70>);
+		/* racket B (left) */
+		object {
+			racket
+			rotate <-35, 10, 70>
+			translate rB_loc
+		}
+		ball_trajectory2(<5.931, 0.036, 8.825>, 3, 7, 5, -1, clock-3.797)
+	#break
+	/* from floor <5.931, 0.036, 8.825> to <5.957, 0.025, 8.533> */
+	#range (3.895, 4.100)
+		#local clk = (clock - 3.895) / (4.1 - 3.895);
+		camera {
+		  location <3.8, 3.5, -0.5>
+		  look_at <3.2, 1.5, 5>
+		}
+
+		/* calculate end position of base point (gripper) of racket A */
+		#local rA_loc = <
+			5.495, 
+			0.976, 
+			5.812 + sq_ball_r
+		> - vrotate(<0, hit_point, 0>, <0, 0, -70>);
+
+		/* racket A (right) */
+		object {
+			racket
+			rotate <0, 0, -70>
+			translate rA_loc
+		}
+
+		#local rB_loc = <0.431, 0.742, 1.016>
+						- vrotate(<0, hit_point, 0>, <-35, 0, 70>);
+		/* racket B (left) */
+		object {
+			racket
+			rotate <-35, 10, 70>
+			translate rB_loc
+		}
+
+		object {
+			ball
+			translate <5.957, 0.025, 8.533 - 0.3*clk>
+		}
 	#break
 #end
