@@ -11,6 +11,12 @@
 
 #debug concat("clock: ",str(clock, 0, 5),"\n")
 
+#local door_loc = <3.2 + sq_glass_door_width/2, 0, 0>;
+object {
+	sq_glass_door
+	translate door_loc
+}
+
 /* ball location: */
 /* rotate the same as the racket to have in the right position */
 /* and translate it to the correct position, i.e. the racket base pos */
