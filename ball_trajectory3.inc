@@ -4,13 +4,14 @@
  *		starting velocity,
  * 		vertical angle, 
  *		horizontal angle,
- *		flying direction of ball (1 to wall, -1 to glass)
- *		clock starting from 0 (unnormalized because of v_start and g)
+ *		flying direction of ball (1 to wall, -1 to glass),
+ *		clock starting from 0 (unnormalized because of v_start and g),
+ *		three old values for keeping the momentum in y direction: old_clock, old speed and initial y value of the hit
  */
-#macro ball_trajectory2(p_start, v_start, vert_angle, hori_angle, ball_direction, local_clock)
+#macro ball_trajectory3(p_start, v_start, vert_angle, hori_angle, ball_direction, local_clock, old_clock, old_v, old_y)
 
 	#local x_val =  v_start*local_clock*sin(radians(hori_angle)) + p_start.x;
-	#local y_val = v_start*local_clock*sin(radians(vert_angle)) - g/2 * pow(local_clock,2) + p_start.y;
+	#local y_val = old_v*old_clock*sin(radians(vert_angle)) - g/2 * pow(old_clock,2) + old_y;
 
 	#if (ball_direction < 0)
 		#local z_val = -v_start*local_clock*cos(radians(vert_angle)) + p_start.z;
