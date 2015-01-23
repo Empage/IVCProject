@@ -397,8 +397,11 @@
 			translate rA_loc
 		}
 
-		#local rB_loc = <0.431, 0.742, 1.016>
-						- vrotate(<0, hit_point, 0>, <-35, 0, 70>);
+		#local rB_loc = <
+			0.431 + 1.7 * clk, 
+			0.742, 
+			1.016 + 1 * clk
+		> - vrotate(<0, hit_point, 0>, <-35, 0, 70>);
 		/* racket B (left) */
 		object {
 			racket
@@ -409,7 +412,7 @@
 	#break
 	/* from racket A <5.495, 0.976, 5.812> to wall <5.849, 0.762, 9.738> */
 	#range (3.100, 3.608)
-//		#local clk = (clock - 3.100) / (3.608 - 3.100);
+		#local clk = (clock - 3.100) / (3.608 - 3.100);
 		camera {
 		  location <3.8, 3.5, -0.5>
 		  look_at <3.2, 1.5, 5>
@@ -419,7 +422,7 @@
 		#local rA_loc = <
 			5.495, 
 			0.976, 
-			5.812 + sq_ball_r
+			5.812 + sq_ball_r - 2*clk
 		> - vrotate(<0, hit_point, 0>, <0, 0, -70>);
 
 		/* racket A (right) */
@@ -429,8 +432,11 @@
 			translate rA_loc
 		}
 
-		#local rB_loc = <0.431, 0.742, 1.016>
-						- vrotate(<0, hit_point, 0>, <-35, 0, 70>);
+		#local rB_loc = <
+			2.131 + 1*clk, 
+			0.742, 
+			2.016 + 2*clk
+		> - vrotate(<0, hit_point, 0>, <-35, 0, 70>);
 		/* racket B (left) */
 		object {
 			racket
@@ -441,7 +447,7 @@
 	#break
 	/* from wall <5.849, 0.762, 9.738> to floor <5.931, 0.036, 8.825> */
 	#range (3.608, 3.798)
-//		#local clk = (clock - 3.100) / (3.608 - 3.100);
+		#local clk = (clock - 3.608) / (3.798 - 3.608);
 		camera {
 		  location <3.8, 3.5, -0.5>
 		  look_at <3.2, 1.5, 5>
@@ -449,9 +455,9 @@
 
 		/* calculate end position of base point (gripper) of racket A */
 		#local rA_loc = <
-			5.495, 
+			5.495 - 1 * clk, 
 			0.976, 
-			5.812 + sq_ball_r
+			3.812 + sq_ball_r - 0.5 *clk*clk
 		> - vrotate(<0, hit_point, 0>, <0, 0, -70>);
 
 		/* racket A (right) */
@@ -461,8 +467,11 @@
 			translate rA_loc
 		}
 
-		#local rB_loc = <0.431, 0.742, 1.016>
-						- vrotate(<0, hit_point, 0>, <-35, 0, 70>);
+		#local rB_loc = <
+			3.131 + 0.5*clk, 
+			0.742, 
+			4.016 + 0.5*clk
+		> - vrotate(<0, hit_point, 0>, <-35, 0, 70>);
 		/* racket B (left) */
 		object {
 			racket
@@ -481,9 +490,9 @@
 
 		/* calculate end position of base point (gripper) of racket A */
 		#local rA_loc = <
-			5.495, 
+			4.495, 
 			0.976, 
-			5.812 + sq_ball_r
+			3.312 + sq_ball_r
 		> - vrotate(<0, hit_point, 0>, <0, 0, -70>);
 
 		/* racket A (right) */
@@ -493,7 +502,7 @@
 			translate rA_loc
 		}
 
-		#local rB_loc = <0.431, 0.742, 1.016>
+		#local rB_loc = <3.631, 0.742, 4.516>
 						- vrotate(<0, hit_point, 0>, <-35, 0, 70>);
 		/* racket B (left) */
 		object {
@@ -513,9 +522,9 @@
 
 		/* calculate end position of base point (gripper) of racket A */
 		#local rA_loc = <
-			5.495, 
+			4.495, 
 			0.976, 
-			5.812 + sq_ball_r
+			3.312 + sq_ball_r
 		> - vrotate(<0, hit_point, 0>, <0, 0, -70>);
 
 		/* racket A (right) */
@@ -525,7 +534,7 @@
 			translate rA_loc
 		}
 
-		#local rB_loc = <0.431, 0.742, 1.016>
+		#local rB_loc = <3.631, 0.742, 4.516>
 						- vrotate(<0, hit_point, 0>, <-35, 0, 70>);
 		/* racket B (left) */
 		object {

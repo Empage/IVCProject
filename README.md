@@ -21,6 +21,8 @@ Animationsreihenfolge:
 2. Animation5
 3. Animation3
 
+Animation7 irgendwann
+
 To use debug output:
 ```
 #debug concat("clk: ",str(clk, 0, 5),"\n")

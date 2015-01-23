@@ -45,7 +45,6 @@ box {
 		}
 	}
 }
-/*
 /* glass wall of the court */
 difference {
 	box {
@@ -60,7 +59,6 @@ difference {
 	}
 	texture {sq_glass}
 }
-*/
 /* wall next to squash court */
 difference {
 	box {
