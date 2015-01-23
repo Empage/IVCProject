@@ -7,7 +7,7 @@ all : animation3 animation4 animation5
 	
 INNAME  := animation7.pov
 tmp :
-	povray Clock=1.830 Debug_Console=On Debug_File=On Width=600 Height=480 +I$(INNAME) +P +O$(OUTNAME) 
+	povray Clock=2.277 Debug_Console=On Debug_File=On Width=600 Height=480 +I$(INNAME) +P +O$(OUTNAME) 
 
 tmp2 :
 	povray animation7.ini +O$(OUTNAME2)

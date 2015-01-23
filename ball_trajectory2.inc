@@ -23,6 +23,13 @@
 	#debug concat("y: ",str(y_val, 0, 5),"\n")
 	#debug concat("z: ",str(z_val, 0, 5),"\n")
 
+	#local current_slope = 
+		tan(radians(vert_angle)) - g/(v_start * cos(radians(vert_angle))) * local_clock;
+//	#debug concat("slope: ",str(current_slope, 0, 5),"\n")
+
+	#local current_angle = degrees(atan(current_slope/1));
+	#debug concat("current angle: ",str(current_angle, 0, 5),"\n")
+
 	object {
 		ball
 		translate <x_val, y_val, z_val>
