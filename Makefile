@@ -5,7 +5,7 @@ OUTNAME2:= generated/`date +%Y%m%d-%H-%M-%S`_.png
 
 all : animation3 animation4 animation5
 	
-INNAME  := animation7.pov
+INNAME  := poster.pov
 tmp :
 	povray Clock=3.895 Debug_Console=On Debug_File=On Width=600 Height=480 +I$(INNAME) +P +O$(OUTNAME) 
 
@@ -21,3 +21,7 @@ animation4 :
 	povray animation4.ini +O$(OUTNAME2)
 animation5 : 
 	povray animation5.ini +O$(OUTNAME2)
+
+poster :
+	povray Width=3508 Height=4960 +Iposter.pov +P +Oposter.png 
+
