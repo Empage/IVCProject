@@ -9,6 +9,12 @@
 
 #include "static/figure.inc"
 
+#local door_loc = <3.2 + sq_glass_door_width/2, 0, 0>;
+object {
+	sq_glass_door
+	translate door_loc
+}
+
 //RacketA
 object {
 	racket
