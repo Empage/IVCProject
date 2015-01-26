@@ -45,7 +45,7 @@ Um bei Animationen dennoch eine Zahl zwischen $0.0$ und $1.0$ zu erhalten, wird 
 
 Der folgende Quellcode zeigt zusammenfassend die Struktur der Szenen:\\
 
-\begin{lstlisting}[caption="Schematischer Aufbau einer animationX.pov Datei"]
+\begin{lstlisting}[caption=Schematischer Aufbau einer animationX.pov Datei]
 #include ...
 
 #switch(clock)
@@ -73,7 +73,7 @@ Version2 behebt den Fehler, dass die Richtung des Balles in dem vertikalen Absch
 
 Weil PovRay sich keine Zustände zwischen dem Generieren von zwei Bildern merken kann, wird für jedes Bild die Flugbahn neuberechnet. Da erschien es am einfachsten, wenn der Ball eine Wand oder den Boden berührt, ab dort eine neue Flugbahnberechnung einzuleiten, indem das Makro erneut mit angepasstem Winkel und Geschwindigkeit aufgerufen wird. Problematisch an dieser Variante ist, dass das Momentum des Ball in Richtung Boden (durch die Erdanziehung), welches ab dem Schlag des Balles immer größer wird, zurück auf $0$ gesetzt wird. Dies sorgt für unrealistische Flugbahnen. Version 3 des Makros behebt dies, indem der ursprüngliche Zeitpunkt des Schlages mit angegeben werden kann, woraus die momentane Geschwindigkeit Richtung Boden errechnet wird. Mit dieser Version sind recht realistische Ballwechsel möglich. Das folgende Listing zeigt den Quellcode der 3. Version:\\
 
-\begin{lstlisting}[caption="Makro zur Generierung einer Flugbahn des Balles (verkürzt)"]
+\begin{lstlisting}[caption=Makro zur Generierung einer Flugbahn des Balles (verkürzt)]
 #macro ball_trajectory3(p_start, v_start, vert_angle, hori_angle, ball_direction, local_clock, old_clock, old_v, old_y)
 	#local x_val =  v_start*local_clock*sin(radians(hori_angle)) + p_start.x;
 	#local y_val = old_v*old_clock*sin(radians(vert_angle)) - g/2 * pow(old_clock,2) + old_y;
@@ -109,7 +109,4 @@ Das Makro berechnet den momentanen $x$, $y$ und $z$ Wert des Balles und verschie
 
 Der $y$ Wert \texttt{y\_val} hängt von nur den initialen Werten beim Abschlag ab, egal wie oft der Ball eine Wand berührt außer der vertikale Winkel. Der ändert sich bei einem Zusammenstoß mit einer Wand nach dem Prinzip Einfallswinkel=Ausfallswinkel. Die Schwerkraft ist hier mit $g$ benannt und wird woanders global im Code definiert. Mit $g$ sowie der Geschwindigkeit, dem vertikalen Winkel, der ursprünglichen Höhe, soie der Zeit ab dem Schlag kann die momentane Höhe bestimmt werden.
 
-Der $z$ Wert \texttt{z\_val} hängt TODO
-
-\subsubsection{Animation des Schlägers}
-TODO
+Der $z$ Wert \texttt{z\_val} hängt von der Geschwindigkeit, dem vertikalen Winkel, dem Startwert sowie der Zeit ab. Wichtig ist hier die Richtung, der durch \texttt{ball\_direction} angegeben wird. Dadurch wird der von der Zeit abhängige Wert entweder auf den Startwert addiert, oder vom ihm abgezogen.
