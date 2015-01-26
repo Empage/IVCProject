@@ -9,7 +9,7 @@
 \end{itemize}
 %
 \section{Handlung}
-Wir setzen ein Squashspiel in PovRay um. Die Spieler laufen durch den Gang in den Squashcourt, machen die Tür zu, geben sich die Hand und fangen an zu spielen. Nach ein paar Ballwechseln jubelt der eine Spieler und der Film ist zu Ende.
+Wir setzen ein Squashspiel mit schwebenden Squashschlägern ohne Spieler in PovRay um. Zwei Zuschauer kommen aus einem Eingang in die Halle und setzen sich auf die Tribüne vorm Squash Court. Die Kamera fliegt durch die Courttür in den Court. Die Tür schließt sich und das Spiel beginnt. Nach ein paar Ballwechseln ist das Spiel vorbei und die Kamera zeigt die jubelnden Zuschauer. 
 %
 \section{Technisches}
 \subsection{Grundlegendes und Konventionen}
@@ -30,6 +30,67 @@ Wir setzen ein Squashspiel in PovRay um. Die Spieler laufen durch den Gang in de
 	\caption{Grundriss der gesamten Karte}\label{fig:halloutline}
 \end{figure}
 \subsection{Aufbau des Programms}
+\subsubsection{Organisation der Dateien}
+Jede Szene hat eine eigene \texttt{pov} und \texttt{ini} Datei, die alle den Präfix \texttt{animation} tragen. So kann jede Szene ihre eigenen Einstellungen haben und einzeln gerendered werden. Alle statischen Programmteile, wie die komplette Halle, aber auch das Modell der Zuschauer, des Balles sowie der Schläger befinden sich in einem Unterverzeichnis names \texttt{static}. Jede Szene inkludiert die statischen Parts. Dabei muss nur die Datei \texttt{main\_static.inc}, sowie \texttt{figure.inc} inkludiert werden, die alle weiteren Parts enthalten (siehe Grafik~\ref{fig:aufbau}).
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=.9\linewidth]{images/aufbau_grafisch.png}
+	\caption{Organisation der Dateien}\label{fig:aufbau}
+\end{figure}
+
+\subsubsection{Schematischer Aufbau einer \texttt{animationX.pov} Datei}
+Die PovRay Clock läuft hier nicht, wie zumeist, von $0.0$ bis $1.0$ pro Szene, sondern entspricht Sekunden in der Realität. Da wir ein Squashspiel erstellen, ist es von Vorteil, in Sekunden zu rechnen, weil so Animation sowie die Ballgeschwindigkeit realistischer dargestellt werden können. 
+
+Um bei Animationen dennoch eine Zahl zwischen $0.0$ und $1.0$ zu erhalten, wird die Clock in jedem Abschnitt skaliert. Damit bleiben die Vorteile der normalisierten Zeit, nämlich dass Animationen übertragbar sind, sowie leichtere Rechnungen bei der Erstellung der Animationen, erhalten.
+
+Der folgende Quellcode zeigt zusammenfassend die Struktur der Szenen:\\
+
+\begin{lstlisting}[caption="Schematischer Aufbau einer animationX.pov Datei"]
+#include ...
+
+#switch(clock)
+	#range (timeA, timeB)
+		#local clk = (clock - timeA) / (timeB - timeA);
+		// time dependend animation code like rackets and ball comes
+		// here using the locally defined clk variable
+	#break
+	#range (timeB, timeC)
+		#local clk = (clock - timeB) / (timeC - timeB);
+		// time dependend animation code like rackets and ball comes
+		// here using the locally defined clk variable
+	#break
+#end
+\end{lstlisting}
+\vspace{1.5em}
+Zunächst kommen die notwendigen includes, anschließlichen wird ein \texttt{switch} Statement auf die globale \texttt{clock} Variable aufgerufen. PovRay erlaubt im \texttt{switch} ein \texttt{range} Statement zu benutzen, sodass man Zeitspannen festlegen kann. In jeder dieser Zeitspannen wird die lokale Variable \texttt{clk} definiert, die die normalisierte Zeit zwischen $0.0$ und $1.0$ enthält. So können einfach Animation definiert werden. Falls eine Animation zu langsam ist, kann die Zeitspanne einfach verkürzt werden und die Animation läuft schneller ab.
+
+\subsubsection{Die Flugbahn des Balles}
+Um die Flugbahn des Balles einigermaßen realistisch zu gestalten, wurden die Gleichungen für den schiefen Wurf verwendet. Allerdings wurde aus Gründen der Einfachheit die Reibung nicht berücksichtigt. Ebenso wurde die Abbremsung des Balles an einer Wand oder am Boden lediglich geschätzt.
+
+Die Berechnung der Flugbahn wurde in ein Makro ausgelagert, welches in \texttt{ball\_trajectory.inc} zu finden ist. Im Laufe der Entwicklung haben wir Mängel festgestellt, sodass auch \texttt{ball\_trajectory2.inc} und \texttt{ball\_trajectory3.inc} entstanden sind. 
+
+Version2 behebt den Fehler, dass die Richtung des Balles in dem vertikalen Abschlagwinkel durch das Vorzeichen enthalten ist. Dies führt dazu, dass es in Richtung der Wand keine negativen vertikalen Winkel und in Richtung der Glasscheibe keine positiven vertikalen Winkel geben kann. Also wurde die Richtung des Balles in ein extra Parameter ausgelagert.
+
+Weil PovRay sich keine Zustände zwischen dem Generieren von zwei Bildern merken kann, wird für jedes Bild die Flugbahn neuberechnet. Da erschien es am einfachsten, wenn der Ball eine Wand oder den Boden berührt, ab dort eine neue Flugbahnberechnung einzuleiten, indem das Makro erneut mit angepasstem Winkel und Geschwindigkeit aufgerufen wird. Problematisch an dieser Variante ist, dass das Momentum des Ball in Richtung Boden (durch die Erdanziehung), welches ab dem Schlag des Balles immer größer wird, zurück auf $0$ gesetzt wird. Dies sorgt für unrealistische Flugbahnen. Version 3 des Makros behebt dies, indem der ursprüngliche Zeitpunkt des Schlages mit angegeben werden kann, woraus die momentane Geschwindigkeit Richtung Boden errechnet wird. Mit dieser Version sind recht realistische Ballwechsel möglich. Das folgende Listing zeigt den Quellcode der 3. Version:\\
+
+\begin{lstlisting}[caption="Makro zur Generierung einer Flugbahn des Balles (verkürzt)"]
+#macro ball_trajectory3(p_start, v_start, vert_angle, hori_angle, ball_direction, local_clock, old_clock, old_v, old_y)
+	#local x_val =  v_start*local_clock*sin(radians(hori_angle)) + p_start.x;
+	#local y_val = old_v*old_clock*sin(radians(vert_angle)) - g/2 * pow(old_clock,2) + old_y;
+
+	#if (ball_direction < 0)
+		#local z_val = -v_start*local_clock*cos(radians(vert_angle)) + p_start.z;
+	#else 
+		#local z_val = v_start*local_clock*cos(radians(vert_angle)) + p_start.z;
+	#end
+
+	object {
+		ball
+		translate <x_val, y_val, z_val>
+	}
+#end
+\end{lstlisting}
+TODO code erklären
+
+\subsubsection{Animation des Schlägers}
 TODO
-
-
