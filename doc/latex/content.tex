@@ -67,7 +67,7 @@ Zunächst kommen die notwendigen includes, anschließlichen wird ein \texttt{swi
 \subsubsection{Die Flugbahn des Balles}
 Um die Flugbahn des Balles einigermaßen realistisch zu gestalten, wurden die Gleichungen für den schiefen Wurf verwendet. Allerdings wurde aus Gründen der Einfachheit die Reibung nicht berücksichtigt. Ebenso wurde die Abbremsung des Balles an einer Wand oder am Boden lediglich geschätzt.
 
-Die Berechnung der Flugbahn wurde in ein Makro ausgelagert, welches in \texttt{ball\_trajectory.inc} zu finden ist. Im Laufe der Entwicklung haben wir Mängel festgestellt, sodass auch \texttt{ball\_trajectory2.inc} und \texttt{ball\_trajectory3.inc} entstanden sind. 
+Die Berechnung der Flugbahn wurde in ein Makro ausgelagert, welches in\\ \texttt{ball\_trajectory.inc} zu finden ist. Im Laufe der Entwicklung haben wir Mängel festgestellt, sodass auch \texttt{ball\_trajectory2.inc} und \texttt{ball\_trajectory3.inc} entstanden sind. 
 
 Version2 behebt den Fehler, dass die Richtung des Balles in dem vertikalen Abschlagwinkel durch das Vorzeichen enthalten ist. Dies führt dazu, dass es in Richtung der Wand keine negativen vertikalen Winkel und in Richtung der Glasscheibe keine positiven vertikalen Winkel geben kann. Also wurde die Richtung des Balles in ein extra Parameter ausgelagert.
 
@@ -90,7 +90,26 @@ Weil PovRay sich keine Zustände zwischen dem Generieren von zwei Bildern merken
 	}
 #end
 \end{lstlisting}
-TODO code erklären
+Die Parameter bedeuten folgendes:
+\begin{itemize}
+	\item \texttt{p\_start}: Die Startposition des Balles (Mittelpunkt des Balles) als 3D-Vektor
+	\item \texttt{v\_vstart}: Die Geschwindigkeit des Balles
+	\item \texttt{vert\_angle}: Der vertikale Abschlagwinkel des Balles. Ein Winkel von 0 führt dazu, dass der Ball parallel zum Boden fliegt. Bei einem positiven Winkel fliegt der Ball nach oben, bei einem negativen nach unten.
+	\item \texttt{hori\_angle}: Der horizontale Abschlagwinkel des Balles. Ein Winkel von 0 führt dazu, dass der Ball parallel zu den Seitenwänden fliegen. Bei einem positiven Winkel fligen der Ball nach rechts, bei einem negativen nach links.
+	\item \texttt{ball\_direction}: Die Flugrichtung des Balles. Bei $1$ fliegt der Ball Richtung Wand, bei $-1$ fliegt der Ball Richtung Glasscheibe.
+	\item \texttt{local\_clock}: Zur Berechnung der Flugbahn wird die momentane Zeit benötigt. Wichtig ist, dass die Zeit nicht normalisiert sein darf, weil die Geschwindigkeit auch nicht normalisiert ist und in $m/s$ angegeben wird. Dennoch muss die Zeit zum Zeitpunkt des Schlages $0.0$ betragen. Deshalb wird grundsätzlich der Wert $clock - timeHit$ übergeben, also die unnormalisierte, in Sekunden laufende, Uhr abzüglich des Schlagzeitpunktes.
+	\item \texttt{old\_clock}: Dieser Wert existiert erst ab v3 des Makros. Falls der Ball von einer Wand abprallt, ist \texttt{local\_clock} der Zeitpunkt des Abpralls.\texttt{old\_clock} kriegt dann den Wert des Abschlages (also $clock - timeHit$), damit darauf die aktuelle Geschwindigkeit in Richtung Boden berechnet werden kann. 
+	\item \texttt{old\_v}: Dieser Wert existiert erst ab v3 des Makros. Bei einem Abprall von der Wand, verringert sich die Geschwindigkeit des Balles. Für die Berechnung der Geschwindigkeit Richtung Boden wird aber der alte Wert benötigt.
+	\item \texttt{old\_y}: Dieser Wert existiert erst ab v3 des Makros. Enthält die Höhe des Balles zum Zeitpunkt des Abschlages, weil darauf die aktuelle Höhe auf Basis der Wurfparabel berechnet wird.
+\end{itemize}
+
+Das Makro berechnet den momentanen $x$, $y$ und $z$ Wert des Balles und verschiebt den Ball anschließend an diesen Punkt. 
+
+\texttt{x\_val} ist der momentane $x$ Wert und hängt von der initialen Position (\texttt{p\_start.x}), der Geschwindigkeit, des Sinus' des horizontalen Winkels sowie von der aktuellen Zeit ab (siehe Zeile 2).
+
+Der $y$ Wert \texttt{y\_val} hängt von nur den initialen Werten beim Abschlag ab, egal wie oft der Ball eine Wand berührt außer der vertikale Winkel. Der ändert sich bei einem Zusammenstoß mit einer Wand nach dem Prinzip Einfallswinkel=Ausfallswinkel. Die Schwerkraft ist hier mit $g$ benannt und wird woanders global im Code definiert. Mit $g$ sowie der Geschwindigkeit, dem vertikalen Winkel, der ursprünglichen Höhe, soie der Zeit ab dem Schlag kann die momentane Höhe bestimmt werden.
+
+Der $z$ Wert \texttt{z\_val} hängt TODO
 
 \subsubsection{Animation des Schlägers}
 TODO
